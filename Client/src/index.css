@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    /* max-width: 100vw; */
+    min-height: 100vh;
+}
+
+body {
+
+    background-image: url("/Contact.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    text-transform: uppercase;
+
+
+}
+
+input {
+    @apply border-2 border-red-400 w-full p-1 outline-none border-t-0 border-l-0 border-r-0;
+}

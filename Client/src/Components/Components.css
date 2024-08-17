@@ -1,0 +1,15 @@
+.registerForm {
+    @apply bg-white w-[70%] sm:w-[40%] md:w-[25%] min-h-[50vh] sm:min-h-[40vh] p-4 rounded-xl;
+    box-shadow: 5px 5px 10px black, -5px -5px 10px black;
+}
+
+.btn {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 7px;
+    margin-top: 20px;
+
+
+}
