@@ -10,14 +10,15 @@ export default function Validate(Data) {
   }
   if (Data.email === "") {
     errors.email = "Email Should Not Be Empty";
-  } else if (Data.name.length < 3 || Data.name.length > 30) {
+  } else if (Data.email.length < 3 || Data.email.length > 30) {
     errors.email = "Please Enter An Valid Email";
   } else {
     errors.email = "";
   }
   if (Data.password === "") {
     errors.password = "Password  Should Not Be Empty";
-  } else if (Data.name.length < 3 || Data.name.length > 30) {
+  }
+  if (Data.password.length < 5 || Data.password.length > 30) {
     errors.password = "Please  enter an Strong Password";
   } else {
     errors.password = "";

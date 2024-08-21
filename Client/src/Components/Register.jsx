@@ -24,10 +24,10 @@ export const Register = () => {
   const handelSumbit = (e) => {
     e.preventDefault();
     const err = Validate(Data);
-    console.log("Validation: ", err);
+    // console.log("Validation: ", err);
     setError(err);
     axios
-      .post("http://localhost:3002/Register", {
+      .post("http://localhost:3002/contact_manager/register", {
         name: Data.name,
         email: Data.email,
         password: Data.password,
@@ -46,7 +46,7 @@ export const Register = () => {
         toast.error("Something Went Wrong");
       });
 
-    console.log("Submitted Data: ", Data);
+    // console.log("Submitted Data: ", Data);
   };
 
   return (
