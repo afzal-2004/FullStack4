@@ -1,13 +1,16 @@
 // eslint-disable-next-line react/prop-types
 export default function Validate(Data) {
   let errors = {};
-  if (Data.name === "") {
-    errors.name = "Name Should Not Be Empty";
-  } else if (Data.name.length < 3 || Data.name.length > 30) {
-    errors.name = "Name Should Be between  3 to 30 Character";
-  } else {
-    errors.name = "";
+  if (Data?.name) {
+    if (Data.name === "") {
+      errors.name = "Name Should Not Be Empty";
+    } else if (Data.name.length < 3 || Data.name.length > 30) {
+      errors.name = "Name Should Be between  3 to 30 Character";
+    } else {
+      errors.name = "";
+    }
   }
+
   if (Data.email === "") {
     errors.email = "Email Should Not Be Empty";
   } else if (Data.email.length < 3 || Data.email.length > 30) {

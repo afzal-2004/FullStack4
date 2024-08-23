@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Components.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Validate from "./validate";
 import axios from "axios";
-export const Register = () => {
-  const navigate = useNavigate();
+import { UserContext } from "../App";
+export const Login = () => {
   const [Data, setData] = useState({
-    name: "",
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
+  const { setuser } = useContext(UserContext);
   const [Error, setError] = useState({});
   // eslint-disable-next-line no-unused-vars
   const [serverError, setserverError] = useState([]);
@@ -30,33 +30,36 @@ export const Register = () => {
     // console.log("Validation: ", err);
     setError(err);
     axios
-      .post("http://localhost:3002/contact_manager/register", {
-        name: Data.name,
+      .post("http://localhost:3002/contact_manager/login", {
         email: Data.email,
         password: Data.password,
       })
       .then((result) => {
-        console.log(result.data);
         if (result.data.success) {
           console.log(result);
-          setData({ name: "", email: "", password: "" });
-          toast.success("Register SuccesFully", {
+          setData({ email: "", password: "" });
+          toast.success("Login SuccesFully", {
             position: "top-right",
             autoClose: 5000,
             closeOnClick: true,
           });
+          console.log(result);
+          localStorage.setItem("toekn", result.data.token);
+          setuser(result.data.user);
+
           setTimeout(() => {
-            navigate("/login");
+            navigate("/");
           }, 5000);
         }
       })
       .catch((err) => {
-        setserverError(err.response?.data.errors[0].msg);
         console.log(err);
-        console.log(err.response?.data);
-        console.log(err.response?.data.errors);
-        console.log(err.response?.data.errors[0]);
-        console.log(err.response?.data.errors[0].msg);
+        setserverError(err.response?.data.errors[0].msg);
+
+        // console.log(err.response?.data);
+        // console.log(err.response?.data.errors);
+        // console.log(err.response?.data.errors[0]);
+        // console.log(err.response?.data.errors[0].msg);
 
         toast.error(
           err.response?.data.errors[0].msg || "Something went wrong "
@@ -70,22 +73,8 @@ export const Register = () => {
 
       <div className=" m-auto flex justify-center  items-center h-[100vh]">
         <section className="registerForm">
-          <h1 className="text-center text-[20px] font-semibold">
-            Register user
-          </h1>
+          <h1 className="text-center text-[20px] font-semibold">Login user</h1>
           <form action="" onSubmit={handelSumbit}>
-            <div className=" mt-3">
-              <label htmlFor="Name">Name :</label>
-              <br />
-              <input
-                type="text"
-                name="name"
-                value={Data.name}
-                placeholder="Enter Your Name"
-                onChange={handleTakeData}
-              />
-              <p className="text-red-500">{Error.name}</p>
-            </div>
             <div className=" mt-3">
               <label htmlFor="Name">Email :</label>
               <br />
@@ -113,13 +102,13 @@ export const Register = () => {
 
             <div className=" justify-between  flex items-center">
               <button type="submit" className="btn">
-                Register
+                login
               </button>
-              <span className="text-center flex text-[14px] justify-center items-center">
-                Already have An Account ?
-                <Link to={"/Login"}>
+              <span className="text-centerx text-[14px] justify-center items-center">
+                If you have not Account ?
+                <Link to={"/Register"}>
                   {" "}
-                  <p className="text-blue-500">Login</p>
+                  <p className="text-blue-500">register</p>
                 </Link>
               </span>
             </div>
