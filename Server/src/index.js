@@ -12,7 +12,6 @@ dotenv.config({
 });
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded());
 app.use("/contact_manager", Userrouter);
 
 connectDB()

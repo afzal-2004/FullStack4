@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import axios from "axios";
+
 import { Navbar } from "./Components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
@@ -7,11 +9,29 @@ import { Login } from "./Components/Login";
 
 import { createContext } from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export const UserContext = createContext();
 function App() {
-  const [user, setuser] = useState();
-  console.log("This is my user", user);
+  const [user, setuser] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3002/contact_manager/verify", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+
+      .then((result) => {
+        console.log(result);
+        if (result.data.success) {
+          setuser(result.data);
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  // console.log("This is my user", user);
 
   return (
     <>

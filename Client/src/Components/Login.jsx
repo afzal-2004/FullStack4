@@ -36,15 +36,18 @@ export const Login = () => {
       })
       .then((result) => {
         if (result.data.success) {
+          // console.log(result.data.token);
           console.log(result);
+
           setData({ email: "", password: "" });
+
           toast.success("Login SuccesFully", {
             position: "top-right",
             autoClose: 5000,
             closeOnClick: true,
           });
           console.log(result);
-          localStorage.setItem("toekn", result.data.token);
+          localStorage.setItem("token", result.data.token);
           setuser(result.data.user);
 
           setTimeout(() => {

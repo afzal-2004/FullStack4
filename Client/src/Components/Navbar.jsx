@@ -20,13 +20,15 @@ export const Navbar = () => {
 
           {user ? (
             <>
-              <Link to={"/Register"}>{user.name}</Link>
               <Link to={"/login"}>Contact</Link>
+              <Link to={"/"} className=" text-red-400">
+                {user.name.toUpperCase()}
+              </Link>
+              <Link to={"/login"}>Logout</Link>
             </>
           ) : (
             <>
               <Link to={"/login"}>Login</Link>
-
               <Link to={"/Register"}>Register</Link>
             </>
           )}

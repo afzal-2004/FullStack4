@@ -69,7 +69,7 @@ const loginUser = async (req, res) => {
     }
 
     const isPasswordValid = await bycrpt.compare(password, User.password);
-    // const isPasswordValid = password;
+
     if (!isPasswordValid) {
       res.status(402).json({
         errors: [{ msg: "Wrong Password " }],
@@ -78,6 +78,7 @@ const loginUser = async (req, res) => {
     const token = jwt.sign({ _id: User._id }, process.env.JWT_SECRECT_KEY, {
       expiresIn: "3d",
     });
+    console.log("Generated Token:", token);
     const userData = { ...User._doc, password: undefined };
     return res.status(200).json({ success: true, user: userData, token });
   } catch (error) {
@@ -85,4 +86,8 @@ const loginUser = async (req, res) => {
     return res.status(500).json({ err: error.message });
   }
 };
-export { registerUser, loginUser };
+
+const Auth = async (req, res) => {
+  return res.status(200).json({ success: true, ...req.user._doc });
+};
+export { registerUser, loginUser, Auth };
