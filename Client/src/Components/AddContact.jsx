@@ -1,6 +1,7 @@
 import "./Components.css";
 import { useState } from "react";
-
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 export const AddContact = () => {
   const [data, setdata] = useState({
     name: "",
@@ -19,9 +20,33 @@ export const AddContact = () => {
 
   const handletakedata = () => {
     console.log(data);
+    axios
+      .post(
+        "http://localhost:5173/contact_manager/dashboard/AddContact",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+
+        {
+          Name: data.name,
+          Email: data.email,
+          Phone: data.mobilenumber,
+          Address: data.address,
+        }
+      )
+      .then((result) => {
+        if (result.data.status) {
+          console.log(result.data);
+          toast.success("Conatct Added Succesfully");
+        }
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <>
+      <ToastContainer />
       <div className="p-4">
         {" "}
         <main className=" bg-slate-400 p-3 w-[90%] m-auto rounded-2xl">
