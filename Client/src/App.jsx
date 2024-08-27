@@ -1,16 +1,11 @@
 /* eslint-disable no-undef */
 import axios from "axios";
 
-import { Navbar } from "./Components/Navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home/Home";
-import { Register } from "./Components/Register";
-import { Login } from "./Components/Login";
-
 import { createContext } from "react";
 
 import { useState, useEffect } from "react";
-import Dashboards from "./pages/Dashboard/Dashboards";
+import { Router } from "./router";
+
 export const UserContext = createContext();
 function App() {
   const [user, setuser] = useState("");
@@ -37,17 +32,7 @@ function App() {
   return (
     <>
       <UserContext.Provider value={{ user, setuser }}>
-        <BrowserRouter>
-          <Navbar />
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-
-            <Route path="/dashboard" element={<Dashboards />}></Route>
-          </Routes>
-        </BrowserRouter>
+        <Router />
       </UserContext.Provider>
     </>
   );

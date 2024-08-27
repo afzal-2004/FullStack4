@@ -6,7 +6,8 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className=" flex justify-between bg-slate-200 p-2 
+        className=" flex justify-between bg-slate-200 p-2  
+       
        "
       >
         <Link to={"/"}>

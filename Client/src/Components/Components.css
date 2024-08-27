@@ -13,3 +13,35 @@
 
 
 }
+
+.sidebar {
+    @apply bg-blue-200 min-w-[22vw] h-[95vh] border border-red-500;
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 5px;
+}
+
+.iconClass {
+    font-size: 25px;
+}
+
+.sideBarindicator {
+    @apply bg-green-400 rounded-xl text-white;
+}
+
+form input {
+
+    background-color: transparent;
+    margin-top: 10px;
+    font-size: 20px;
+
+}
+
+form input::placeholder {
+    color: whitesmoke;
+}
