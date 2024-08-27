@@ -10,6 +10,7 @@ import { Login } from "./Components/Login";
 import { createContext } from "react";
 
 import { useState, useEffect } from "react";
+import Dashboards from "./pages/Dashboard/Dashboards";
 export const UserContext = createContext();
 function App() {
   const [user, setuser] = useState("");
@@ -43,6 +44,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+
+            <Route path="/dashboard" element={<Dashboards />}></Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

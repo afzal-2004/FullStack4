@@ -20,7 +20,7 @@ export const Navbar = () => {
 
           {user ? (
             <>
-              <Link to={"/login"}>Contact</Link>
+              <Link to={"/"}>Contact</Link>
               <Link to={"/"} className=" text-red-400">
                 {user.name.toUpperCase()}
               </Link>
