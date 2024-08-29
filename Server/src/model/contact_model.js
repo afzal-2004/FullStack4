@@ -16,7 +16,7 @@ const ContactSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
+    Address: {
       type: String,
       lowercase: true,
     },

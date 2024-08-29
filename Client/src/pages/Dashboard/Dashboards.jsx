@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 const Dashboards = () => {
   const [Data, setData] = useState([]);
+  console.log(Data);
   useEffect(() => {
     axios
       .get("http://localhost:3002/contact_manager/contacts", {
@@ -12,6 +13,7 @@ const Dashboards = () => {
       })
       .then((res) => {
         console.log(res);
+        setData(res.data);
       })
       .catch((err) => {
         console.log(err);
