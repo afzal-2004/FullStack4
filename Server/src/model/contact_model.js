@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { user } from "./user_model";
 
 const ContactSchema = new mongoose.Schema(
   {
@@ -8,7 +7,7 @@ const ContactSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
     },
-    email: {
+    Email: {
       type: String,
       required: true,
       lowercase: true,
@@ -21,7 +20,7 @@ const ContactSchema = new mongoose.Schema(
       type: String,
       lowercase: true,
     },
-    probideby: {
+    probided_by: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
@@ -30,4 +29,4 @@ const ContactSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-export default Conatct = mongoose.model("Conatct", ContactSchema);
+export const Contact = mongoose.model("Contact", ContactSchema);

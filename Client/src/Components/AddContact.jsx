@@ -21,10 +21,10 @@ export const AddContact = () => {
   };
 
   const handletakedata = () => {
-    console.log(data);
+    // console.log(data);
     axios
       .post(
-        "http://localhost:3002/contact_manager/dashboard/AddContact",
+        "http://localhost:3002/contact_manager/AddContact",
         {
           Name: data.name,
           Email: data.email,

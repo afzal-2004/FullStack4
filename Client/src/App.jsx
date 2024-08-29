@@ -19,7 +19,7 @@ function App() {
       })
 
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.data.success) {
           setuser(result.data);
         }
@@ -27,7 +27,7 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log("This is my user", user);
+  // console.log("This is my user", user);
 
   return (
     <>
