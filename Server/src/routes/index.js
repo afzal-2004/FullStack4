@@ -10,6 +10,6 @@ router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/verify").get(VerifyUser, Auth);
 
-//    CONTACT RELATED ROUTER
+//    DASHBOARD RELATED ROUTER
 router.route("/dashboard/AddContact").post(VerifyUser, addcontact);
 export default router;

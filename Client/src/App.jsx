@@ -27,7 +27,7 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  // console.log("This is my user", user);
+  console.log("This is my user", user);
 
   return (
     <>

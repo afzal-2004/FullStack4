@@ -2,7 +2,9 @@ import "./Components.css";
 import { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export const AddContact = () => {
+  const navigate = useNavigate();
   const [data, setdata] = useState({
     name: "",
     email: "",
@@ -22,18 +24,17 @@ export const AddContact = () => {
     console.log(data);
     axios
       .post(
-        "http://localhost:5173/contact_manager/dashboard/AddContact",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        },
-
+        "http://localhost:3002/contact_manager/dashboard/AddContact",
         {
           Name: data.name,
           Email: data.email,
           Phone: data.mobilenumber,
           Address: data.address,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       )
       .then((result) => {
@@ -43,6 +44,7 @@ export const AddContact = () => {
         }
       })
       .catch((err) => console.log(err));
+    navigate("/dashboard");
   };
   return (
     <>

@@ -8,13 +8,16 @@ export const VerifyUser = async (req, res, next) => {
     const token = authHeader.split(" ")[1];
 
     jwt.verify(token, process.env.JWT_SECRECT_KEY, async (err, payload) => {
+      if (err) {
+        return res.status(401).json({ error: "Unauthrized token" });
+      }
       try {
-        if (err) {
-          return res.status(401).json({ error: "Unauthrized token" });
-        }
         const User = await user
           .findOne({ _id: payload._id })
           .select("-password");
+        if (!User) {
+          return res.status(404).json({ error: "User not found" });
+        }
         req.user = User;
         next();
       } catch (error) {
