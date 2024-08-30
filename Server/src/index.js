@@ -5,7 +5,7 @@ import cors from "cors";
 const app = express();
 import Userrouter from "./routes/index.js";
 app.get("/", (req, res) => {
-  req.send("Hello World");
+  res.send("Hello World");
 });
 dotenv.config({
   path: "./.env",
@@ -13,6 +13,8 @@ dotenv.config({
 app.use(cors());
 app.use(express.json());
 app.use("/contact_manager", Userrouter);
+
+
 
 connectDB()
   .then(() => {

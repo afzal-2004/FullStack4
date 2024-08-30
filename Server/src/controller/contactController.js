@@ -1,32 +1,34 @@
 import { Contact } from "../model/contact_model.js";
 
-const addcontact = async (req, res) => {
-  const { Name, Email, Phone, Address, probided_by } = req.body;
-  // console.log("name", Name);
-  // console.log("Email :", Email);
-  // console.log("Phone:", Phone);
-  // console.log("Address:", Address);
+const addContact = async (req, res) => {
+  const { Name, Email, Phone, Address, provided_by } = req.body;  // Fixed the typo: probided_by -> provided_by
+
   try {
-    const newContct = new Contact({ Name, Email, Phone, Address, probided_by });
-    await newContct.save();
-    console.log(newContct);
+    const newContact = new Contact({ Name, Email, Phone, Address, provided_by });  // Fixed the typo: newContct -> newContact
+    await newContact.save();
+    console.log(newContact);
+    return res.status(201).json(newContact);  // Responding with the created contact and appropriate status
   } catch (error) {
     console.log(error);
     return res.status(401).json({
-      error: "Someting went wrong ",
+      error: "Something went wrong",
+      details: error.message  // More informative error message
     });
   }
 };
-const AccessConatct = async (req, res) => {
-  const data = await res.data;
-  // console.log("Afzal");
+
+const accessContact = async (req, res) => {
   try {
-    Contact.find({}).then(function (contact) {
-      res.json(contact);
-      console.log("Conatct data is :", contact);
-    });
+    const contacts = await Contact.find({});  // Fetching all contacts from the database
+    res.json(contacts);
+    console.log("Contact data:", contacts);  // Fixed the typo: Contact -> Contact
   } catch (error) {
-    return res(400).json("Something Went Wrong ");
+    console.log(error);
+    return res.status(400).json({
+      error: "Something went wrong",
+      details: error.message  // More informative error message
+    });
   }
 };
-export { addcontact, AccessConatct };
+
+export { addContact, accessContact };

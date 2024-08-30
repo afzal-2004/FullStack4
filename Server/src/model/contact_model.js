@@ -20,7 +20,7 @@ const ContactSchema = new mongoose.Schema(
       type: String,
       lowercase: true,
     },
-    probided_by: {
+    provided_by: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },

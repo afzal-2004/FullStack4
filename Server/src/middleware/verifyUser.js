@@ -9,7 +9,7 @@ export const VerifyUser = async (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRECT_KEY, async (err, payload) => {
       if (err) {
-        return res.status(401).json({ error: "Unauthrized token" });
+        return res.status(401).json({ error: "Unauthrized token", err });
       }
       try {
         const User = await user
