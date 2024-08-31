@@ -4,12 +4,7 @@ import DB_NAME from "../constant.js";
 const connectDB = async () => {
   try {
     const ConnectionInstance = await mongoose.connect(
-      `${process.env.MONGODB_URL}`, // Since your DB name is included in the connection string, no need to append it here
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        writeConcern: { w: 'majority', wtimeout: 5000 } // Explicitly setting the write concern
-      }
+      `${process.env.MONGODB_URL}/${DB_NAME}` // Since your DB name is included in the connection string, no need to append it here
     );
 
     console.log("Connected On!", ConnectionInstance.connection.host);

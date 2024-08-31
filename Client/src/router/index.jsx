@@ -7,6 +7,7 @@ import { Login } from "../Components/Login";
 import { AddContact } from "../Components/AddContact";
 import { Sidebar } from "../Components/Sidebar";
 import { Profile } from "../Components/Profile";
+import { Contact } from "../Components/Contact";
 export const Router = () => {
   return (
     <>
@@ -20,6 +21,7 @@ export const Router = () => {
             <Route path="/login" element={<Login />} />
 
             <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route path="/dashboard/contact" element={<Contact />} />
               <Route path="/dashboard/AddContact" element={<AddContact />} />
               <Route path="/dashboard/Profile" element={<Profile />} />
             </Route>
@@ -34,6 +36,7 @@ const DashboardLayout = () => {
     <>
       <div className="flex gap-2">
         <Sidebar />
+
         <Outlet />
       </div>
     </>

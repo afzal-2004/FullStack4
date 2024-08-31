@@ -13,6 +13,6 @@ router.get("/verify", VerifyUser, Auth);
 
 // DASHBOARD RELATED ROUTES
 router.post("/addContact", VerifyUser, addContact);
-router.get("/contacts", accessContact);
+router.get("/getContact", accessContact);
 
 export default router;

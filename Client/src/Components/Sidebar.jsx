@@ -1,23 +1,20 @@
 import "./Components.css";
 
-import { useEffect, useState } from "react";
+import { UserContext } from "../App";
 import { CgProfile } from "react-icons/cg";
 import { FaPhoneAlt } from "react-icons/fa";
 import { BsFillTelephonePlusFill } from "react-icons/bs";
 import { IoMdLogOut } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 export const Sidebar = () => {
-  const [Indecator, setIndecator] = useState(1);
-
-  useEffect(() => {
-    setIndecator(1);
-  }, []);
+  const { Indecator, setIndecator } = useContext(UserContext);
 
   return (
     <>
       <div className="sidebar">
         <ul className="flex flex-col justify-center  h-full gap-6 text-[25px] p-4   font-se">
-          <Link to={"/dashboard"}>
+          <Link to={"/dashboard/contact"}>
             <li
               className={`${Indecator === 1 && "sideBarindicator"}`}
               onClick={() => {

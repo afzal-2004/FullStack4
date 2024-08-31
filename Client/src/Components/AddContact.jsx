@@ -1,9 +1,11 @@
 import "./Components.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { UserContext } from "../App";
 export const AddContact = () => {
+  const { setIndecator } = useContext(UserContext);
   const navigate = useNavigate();
   const [data, setdata] = useState({
     name: "",
@@ -20,11 +22,11 @@ export const AddContact = () => {
     });
   };
 
-  const handletakedata = () => {
-    // console.log(data);
+  const handletakedata = (e) => {
+    e.preventDefault();
     axios
       .post(
-        "http://localhost:3002/contact_manager/AddContact",
+        "http://localhost:3002/contact_manager/addContact",
         {
           Name: data.name,
           Email: data.email,
@@ -38,22 +40,34 @@ export const AddContact = () => {
         }
       )
       .then((result) => {
-        if (result.data.status) {
-          console.log(result.data);
-          toast.success("Conatct Added Succesfully");
+        if (result.data.success) {
+          console.log(result);
+          toast.success("Contact Added Succcefully");
+
+          setdata({
+            name: "",
+            email: "",
+            mobilenumber: "",
+            address: "",
+          });
+          setTimeout(() => {
+            navigate("/dashboard/contact");
+            setIndecator(1);
+          }, 5000);
         }
       })
-      .catch((err) => console.log(err));
-    navigate("/dashboard");
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong ");
+      });
   };
   return (
     <>
-      <ToastContainer />
       <div className="p-4">
         {" "}
         <main className=" bg-slate-400 p-3 w-[90%] m-auto rounded-2xl">
           <h1 className="text-center text-[25px]"> Create Contact</h1>
-          <form action="sumbit" onSubmit={handletakedata} className=" ">
+          <form onSubmit={handletakedata} className=" ">
             <input
               type="text"
               value={data.name}
@@ -84,7 +98,6 @@ export const AddContact = () => {
               onChange={ontakedata}
             />
             <button
-              type="sumbit"
               className="bg-green-200 p-3 
             mt-[3vh] w-full rounded-xl"
             >

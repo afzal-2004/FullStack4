@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import axios from "axios";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { createContext } from "react";
 
 import { useState, useEffect } from "react";
@@ -9,6 +10,11 @@ import { Router } from "./router";
 export const UserContext = createContext();
 function App() {
   const [user, setuser] = useState("");
+  const [Indecator, setIndecator] = useState(1);
+
+  useEffect(() => {
+    setIndecator(1);
+  }, []);
 
   useEffect(() => {
     axios
@@ -27,11 +33,18 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
+  const value = {
+    user,
+    setuser,
+    Indecator,
+    setIndecator,
+  };
   // console.log("This is my user", user);
 
   return (
     <>
-      <UserContext.Provider value={{ user, setuser }}>
+      <UserContext.Provider value={value}>
+        <ToastContainer />
         <Router />
       </UserContext.Provider>
     </>
