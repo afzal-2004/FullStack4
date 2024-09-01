@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Components.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { MdAutoDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
+import { UserContext } from "../App";
 export const Contact = () => {
+  const { setCurrentid } = useContext(UserContext);
   const [Data, setData] = useState([]);
   const [realoddata, setrealoddata] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  // const [id, setid] = useState(null);
 
   useEffect(() => {
     axios
@@ -44,17 +45,6 @@ export const Contact = () => {
       .catch((err) => {
         console.log(err);
         toast.err("Error ");
-      });
-  };
-
-  const handleUpdateItems = (id) => {
-    axios
-      .put(`http://localhost:3002/contact_manager/deleteContact/${id}`)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -93,14 +83,17 @@ export const Contact = () => {
                       }}
                     />
                   </button>
-                  <button className=" border border-green-700">
-                    <FaEdit
-                      className="text-green-500"
+
+                  <Link to={`/dashboard/update/${data._id}`}>
+                    <button
+                      className=" border border-green-700"
                       onClick={() => {
-                        handleUpdateItems(data._id);
+                        setCurrentid(data._id);
                       }}
-                    />
-                  </button>
+                    >
+                      <FaEdit className="text-green-500" />
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}

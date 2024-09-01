@@ -8,7 +8,10 @@ import { AddContact } from "../Components/AddContact";
 import { Sidebar } from "../Components/Sidebar";
 import { Profile } from "../Components/Profile";
 import { Contact } from "../Components/Contact";
+import { UserContext } from "../App";
+import { useContext } from "react";
 export const Router = () => {
+  const { Currentid } = useContext(UserContext);
   return (
     <>
       <div>
@@ -24,6 +27,10 @@ export const Router = () => {
               <Route path="/dashboard/contact" element={<Contact />} />
               <Route path="/dashboard/AddContact" element={<AddContact />} />
               <Route path="/dashboard/Profile" element={<Profile />} />
+              <Route
+                path="/dashboard/update/:id"
+                element={<AddContact Currentid={Currentid} />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>

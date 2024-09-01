@@ -11,7 +11,8 @@ export const UserContext = createContext();
 function App() {
   const [user, setuser] = useState("");
   const [Indecator, setIndecator] = useState(1);
-
+  const [Currentid, setCurrentid] = useState(null);
+  console.log("Current product  id is :", Currentid);
   useEffect(() => {
     setIndecator(1);
   }, []);
@@ -38,6 +39,8 @@ function App() {
     setuser,
     Indecator,
     setIndecator,
+    Currentid,
+    setCurrentid,
   };
   // console.log("This is my user", user);
 

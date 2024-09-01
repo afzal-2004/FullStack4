@@ -4,7 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserContext } from "../App";
-export const AddContact = () => {
+// eslint-disable-next-line react/prop-types, no-unused-vars
+export const AddContact = ({ Currentid }) => {
   const { setIndecator } = useContext(UserContext);
   const navigate = useNavigate();
   const [data, setdata] = useState({
