@@ -1,7 +1,12 @@
 import { Router } from "express";
 
 import { registerUser, loginUser, Auth } from "../controller/userController.js";
-import { addContact, accessContact } from "../controller/contactController.js";
+import {
+  addContact,
+  accessContact,
+  deleteContact,
+  updateContact,
+} from "../controller/contactController.js";
 import { VerifyUser } from "../middleware/verifyUser.js";
 
 const router = Router();
@@ -14,5 +19,7 @@ router.get("/verify", VerifyUser, Auth);
 // DASHBOARD RELATED ROUTES
 router.post("/addContact", VerifyUser, addContact);
 router.get("/getContact", accessContact);
+router.delete("/deleteContact/:id", deleteContact);
+router.put("updateContact/:id", updateContact);
 
 export default router;

@@ -41,8 +41,10 @@ export const AddContact = () => {
       )
       .then((result) => {
         if (result.data.success) {
-          console.log(result);
-          toast.success("Contact Added Succcefully");
+          // console.log(result);
+          toast.success("Contact Added Succcefully", {
+            autoClose: 3000,
+          });
 
           setdata({
             name: "",
@@ -53,14 +55,17 @@ export const AddContact = () => {
           setTimeout(() => {
             navigate("/dashboard/contact");
             setIndecator(1);
-          }, 5000);
+          }, 3000);
         }
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Something went wrong ");
+        toast.error("Something went wrong ", {
+          autoClose: 3000,
+        });
       });
   };
+
   return (
     <>
       <div className="p-4">

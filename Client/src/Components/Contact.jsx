@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import "./Components.css";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { MdAutoDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 
 export const Contact = () => {
   const [Data, setData] = useState([]);
-  // console.log(Data);
+  const [realoddata, setrealoddata] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  // const [id, setid] = useState(null);
+
   useEffect(() => {
     axios
       .get("http://localhost:3002/contact_manager/getContact", {
@@ -19,7 +23,41 @@ export const Contact = () => {
         setData(result.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [realoddata]);
+
+  const handeleDeleteItems = (id) => {
+    axios
+      .delete(`http://localhost:3002/contact_manager/deleteContact/${id}`)
+      .then((result) => {
+        // console.log(result);
+
+        if (result.status === 200) {
+          // console.log(result);
+          toast.success("Deleted Succefully ", {
+            autoClose: 3000,
+          });
+          setTimeout(() => {
+            setrealoddata(true);
+          }, 1000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.err("Error ");
+      });
+  };
+
+  const handleUpdateItems = (id) => {
+    axios
+      .put(`http://localhost:3002/contact_manager/deleteContact/${id}`)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div className=" w-full  ">
@@ -48,10 +86,20 @@ export const Contact = () => {
                 text-[25px] "
                 >
                   <button className=" border border-red-500">
-                    <MdAutoDelete className="text-red-500" />
+                    <MdAutoDelete
+                      className="text-red-500"
+                      onClick={() => {
+                        handeleDeleteItems(data._id);
+                      }}
+                    />
                   </button>
                   <button className=" border border-green-700">
-                    <FaEdit className="text-green-500" />
+                    <FaEdit
+                      className="text-green-500"
+                      onClick={() => {
+                        handleUpdateItems(data._id);
+                      }}
+                    />
                   </button>
                 </td>
               </tr>

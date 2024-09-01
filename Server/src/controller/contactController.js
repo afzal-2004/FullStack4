@@ -52,5 +52,24 @@ const accessContact = async (req, res) => {
     });
   }
 };
+const deleteContact = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deleteContect = await Contact.findByIdAndDelete({ _id: id });
+    if (!deleteContact) {
+      return res.status(404).json({
+        error: "Somethng went  Wrong",
+      });
+    }
+    return res.json(deleteContact);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      error: "Somethng went  Wrong",
+      details: error.message,
+    });
+  }
+};
+const updateContact = async (req, res) => {};
 
-export { addContact, accessContact };
+export { addContact, accessContact, deleteContact, updateContact };
