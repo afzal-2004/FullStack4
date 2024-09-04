@@ -71,12 +71,12 @@ const deleteContact = async (req, res) => {
   }
 };
 
-const updateContact = async (req, res) => {
+const getupdateContact = async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id);
+    // console.log(id);
     const userDetail = await Contact.findById(id);
-    console.log(userDetail);
+    // console.log(userDetail);
     if (userDetail) {
       return res.json(userDetail);
     }
@@ -92,4 +92,35 @@ const updateContact = async (req, res) => {
   }
 };
 
-export { addContact, accessContact, deleteContact, updateContact };
+const UpdateuserContact = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updateData = req.body;
+    // const updateUser = Contact.findByIdAndUpdate(id);
+    const updatedUser = await Contact.findByIdAndUpdate(id, updateData, {
+      new: true, // Return the updated document
+      runValidators: true, // Ensure that the data passes schema validation
+    });
+    console.log(updatedUser);
+    if (!updatedUser) {
+      return res.status(404).json({
+        error: "User  Name is execited  ",
+      });
+    }
+    return res.status(201).json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      error: "Something went Wrong ",
+      details: error.message,
+    });
+  }
+};
+
+export {
+  addContact,
+  accessContact,
+  deleteContact,
+  getupdateContact,
+  UpdateuserContact,
+};

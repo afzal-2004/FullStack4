@@ -5,7 +5,8 @@ import {
   addContact,
   accessContact,
   deleteContact,
-  updateContact,
+  getupdateContact,
+  UpdateuserContact,
 } from "../controller/contactController.js";
 import { VerifyUser } from "../middleware/verifyUser.js";
 
@@ -20,6 +21,7 @@ router.get("/verify", VerifyUser, Auth);
 router.post("/addContact", VerifyUser, addContact);
 router.get("/getContact", accessContact);
 router.delete("/deleteContact/:id", deleteContact);
-router.get("/getdetail/:id", updateContact);
+router.get("/getdetail/:id", getupdateContact);
+router.put("updateContact/:id", UpdateuserContact);
 
 export default router;

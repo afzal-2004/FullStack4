@@ -20,7 +20,7 @@ function App() {
   const [Indecator, setIndecator] = useState(1);
   const [Currentid, setCurrentid] = useState(null);
   const [Update, setUpdate] = useState(false);
-  console.log("Current product  id is :", Currentid);
+  // console.log("Current product  id is :", Currentid);
 
   useEffect(() => {
     setIndecator(1);
@@ -48,8 +48,8 @@ function App() {
     axios
       .get(`http://localhost:3002/contact_manager/getdetail/${Currentid}`)
       .then((result) => {
-        console.log(result);
-        console.log(result.data);
+        // console.log(result);
+        // console.log(result.data);
         setdata({
           name: result.data.Name,
           email: result.data.Email,

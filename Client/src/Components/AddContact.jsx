@@ -5,10 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserContext } from "../App";
 // eslint-disable-next-line react/prop-types, no-unused-vars
-export const AddContact = ({ Currentid }) => {
-  const { setIndecator, Update, data, setdata } = useContext(UserContext);
+export const AddContact = () => {
+  const { setIndecator, Update, data, setdata, Currentid } =
+    useContext(UserContext);
   const navigate = useNavigate();
-
+  const payload = {
+    Name: data.name,
+    Email: data.email,
+    Phone: data.mobilenumber,
+    Address: data.address,
+  };
   const ontakedata = (e) => {
     e.preventDefault();
     setdata({
@@ -19,46 +25,71 @@ export const AddContact = ({ Currentid }) => {
 
   const handletakedata = (e) => {
     e.preventDefault();
-    axios
-      .post(
-        "http://localhost:3002/contact_manager/addContact",
-        {
-          Name: data.name,
-          Email: data.email,
-          Phone: data.mobilenumber,
-          Address: data.address,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((result) => {
-        if (result.data.success) {
-          // console.log(result);
-          toast.success("Contact Added Succcefully", {
-            autoClose: 3000,
-          });
 
-          setdata({
-            name: "",
-            email: "",
-            mobilenumber: "",
-            address: "",
-          });
-          setTimeout(() => {
-            navigate("/dashboard/contact");
-            setIndecator(1);
-          }, 3000);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Something went wrong ", {
-          autoClose: 3000,
-        });
-      });
+    {
+      !Update
+        ? axios
+            .post("http://localhost:3002/contact_manager/addContact", payload, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            })
+            .then((result) => {
+              if (result.data.success) {
+                // console.log(result);
+                toast.success("Contact Added Succcefully", {
+                  autoClose: 3000,
+                });
+
+                setdata({
+                  name: "",
+                  email: "",
+                  mobilenumber: "",
+                  address: "",
+                });
+                setTimeout(() => {
+                  navigate("/dashboard/contact");
+                  setIndecator(1);
+                }, 3000);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.error("Something went wrong ", {
+                autoClose: 3000,
+              });
+            })
+        : axios
+            .put(
+              `http://localhost:3002/contact_manager/updateContact/${Currentid}`,
+              payload
+            )
+            .then((result) => {
+              if (result.data.success) {
+                // console.log(result);
+                toast.success("Contact Update Succefully ", {
+                  autoClose: 3000,
+                });
+
+                setdata({
+                  name: "",
+                  email: "",
+                  mobilenumber: "",
+                  address: "",
+                });
+                setTimeout(() => {
+                  navigate("/dashboard/contact");
+                  setIndecator(1);
+                }, 3000);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.error("Something went wrong ", {
+                autoClose: 3000,
+              });
+            });
+    }
   };
 
   return (
@@ -67,7 +98,7 @@ export const AddContact = ({ Currentid }) => {
         {" "}
         <main className=" bg-slate-400 p-3 w-[90%] m-auto rounded-2xl">
           <h1 className="text-center text-[25px]"> Create Contact</h1>
-          <form onSubmit={handletakedata} className=" ">
+          <form onSubmit={handletakedata}>
             <input
               type="text"
               value={data.name}
