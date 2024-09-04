@@ -9,10 +9,19 @@ import { Router } from "./router";
 
 export const UserContext = createContext();
 function App() {
+  const [data, setdata] = useState({
+    name: "",
+    email: "",
+    mobilenumber: "",
+    address: "",
+  });
+
   const [user, setuser] = useState("");
   const [Indecator, setIndecator] = useState(1);
   const [Currentid, setCurrentid] = useState(null);
+  const [Update, setUpdate] = useState(false);
   console.log("Current product  id is :", Currentid);
+
   useEffect(() => {
     setIndecator(1);
   }, []);
@@ -34,15 +43,36 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
+  const HandleUpdateDataTake = (Currentid) => {
+    // console.log("Khan");
+    axios
+      .get(`http://localhost:3002/contact_manager/getdetail/${Currentid}`)
+      .then((result) => {
+        console.log(result);
+        console.log(result.data);
+        setdata({
+          name: result.data.Name,
+          email: result.data.Email,
+          mobilenumber: result.data.Phone,
+          address: result.data.Address,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   const value = {
+    data,
+    setdata,
     user,
     setuser,
     Indecator,
     setIndecator,
     Currentid,
     setCurrentid,
+    Update,
+    setUpdate,
+    HandleUpdateDataTake,
   };
-  // console.log("This is my user", user);
 
   return (
     <>

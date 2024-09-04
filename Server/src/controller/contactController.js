@@ -11,7 +11,7 @@ const addContact = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
 
     const decode = jwt.verify(token, process.env.JWT_SECRECT_KEY);
-    console.log("Decode Secrcet ", decode);
+    // console.log("Decode Secrcet ", decode);
     const newContact = new Contact({
       Name,
       Email,
@@ -20,7 +20,7 @@ const addContact = async (req, res) => {
       provided_by: decode._id,
     }); // Fixed the typo: newContct -> newContact
     await newContact.save();
-    console.log(newContact);
+    // console.log(newContact);
     return res.status(201).json({
       success: true,
     }); // Responding with the created contact and appropriate status
@@ -36,14 +36,14 @@ const addContact = async (req, res) => {
 const accessContact = async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-    console.log(token);
+    // console.log(token);
     const decode = jwt.verify(token, process.env.JWT_SECRECT_KEY);
-    console.log("Access Token Secrect key : ", decode);
+    // console.log("Access Token Secrect key : ", decode);
     const contacts = await Contact.find({
       provided_by: decode._id,
     }); // Fetching all contacts from the database
     res.json(contacts);
-    console.log("Contact data:", contacts); // Fixed the typo: Contact -> Contact
+    // console.log("Contact data:", contacts); // Fixed the typo: Contact -> Contact
   } catch (error) {
     console.log(error);
     return res.status(400).json({
@@ -70,6 +70,26 @@ const deleteContact = async (req, res) => {
     });
   }
 };
-const updateContact = async (req, res) => {};
+
+const updateContact = async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
+    const userDetail = await Contact.findById(id);
+    console.log(userDetail);
+    if (userDetail) {
+      return res.json(userDetail);
+    }
+    return res.status(500).json({
+      error: "Please try Some time later",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      error: "Something Went Wrong ",
+      details: error.message,
+    });
+  }
+};
 
 export { addContact, accessContact, deleteContact, updateContact };

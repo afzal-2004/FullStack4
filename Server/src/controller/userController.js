@@ -90,4 +90,8 @@ const loginUser = async (req, res) => {
 const Auth = async (req, res) => {
   return res.status(200).json({ success: true, ...req.user._doc });
 };
+const logoutuser = async (req, res) => {
+  //1 .   CHECK  THAT USE IS LOGIN OR NOT
+  //2 .  IF USER IS LOGIN THEN SUCCESFULLY LOAGOUT USER
+};
 export { registerUser, loginUser, Auth };

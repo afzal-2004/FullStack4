@@ -20,6 +20,6 @@ router.get("/verify", VerifyUser, Auth);
 router.post("/addContact", VerifyUser, addContact);
 router.get("/getContact", accessContact);
 router.delete("/deleteContact/:id", deleteContact);
-router.put("updateContact/:id", updateContact);
+router.get("/getdetail/:id", updateContact);
 
 export default router;

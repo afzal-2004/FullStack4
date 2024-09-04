@@ -1,19 +1,13 @@
 import "./Components.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserContext } from "../App";
 // eslint-disable-next-line react/prop-types, no-unused-vars
 export const AddContact = ({ Currentid }) => {
-  const { setIndecator } = useContext(UserContext);
+  const { setIndecator, Update, data, setdata } = useContext(UserContext);
   const navigate = useNavigate();
-  const [data, setdata] = useState({
-    name: "",
-    email: "",
-    mobilenumber: "",
-    address: "",
-  });
 
   const ontakedata = (e) => {
     e.preventDefault();
@@ -107,7 +101,7 @@ export const AddContact = ({ Currentid }) => {
               className="bg-green-200 p-3 
             mt-[3vh] w-full rounded-xl"
             >
-              Add new{" "}
+              {Update ? "Update Contact" : "Add new"}{" "}
             </button>
           </form>
         </main>

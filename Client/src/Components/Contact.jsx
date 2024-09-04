@@ -7,9 +7,11 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 export const Contact = () => {
-  const { setCurrentid } = useContext(UserContext);
+  const { setCurrentid, setUpdate, HandleUpdateDataTake } =
+    useContext(UserContext);
   const [Data, setData] = useState([]);
   const [realoddata, setrealoddata] = useState(false);
+
   // eslint-disable-next-line no-unused-vars
 
   useEffect(() => {
@@ -89,6 +91,9 @@ export const Contact = () => {
                       className=" border border-green-700"
                       onClick={() => {
                         setCurrentid(data._id);
+                        setUpdate(true);
+
+                        HandleUpdateDataTake(data._id);
                       }}
                     >
                       <FaEdit className="text-green-500" />

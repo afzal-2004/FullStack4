@@ -8,7 +8,7 @@ import { IoMdLogOut } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 export const Sidebar = () => {
-  const { Indecator, setIndecator } = useContext(UserContext);
+  const { Indecator, setIndecator, setdata } = useContext(UserContext);
 
   return (
     <>
@@ -31,6 +31,12 @@ export const Sidebar = () => {
               className={`${Indecator === 2 && "sideBarindicator"}`}
               onClick={() => {
                 setIndecator(2);
+                setdata({
+                  name: "",
+                  email: "",
+                  mobilenumber: "",
+                  address: "",
+                });
               }}
             >
               <BsFillTelephonePlusFill className="iconClass" />
