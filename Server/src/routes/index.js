@@ -22,6 +22,6 @@ router.post("/addContact", VerifyUser, addContact);
 router.get("/getContact", accessContact);
 router.delete("/deleteContact/:id", deleteContact);
 router.get("/getdetail/:id", getupdateContact);
-router.put("updateContact/:id", UpdateuserContact);
+router.put("/updateContact/:id", UpdateuserContact);
 
 export default router;
