@@ -54,7 +54,7 @@ export const Sidebar = () => {
               <p>Profile</p>
             </li>
           </Link>
-          <Link to={"/dashboard"}>
+          <Link to={"/dashboard/logout"}>
             <li
               className={`${Indecator === 4 && "sideBarindicator"}`}
               onClick={() => {

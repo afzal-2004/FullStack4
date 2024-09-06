@@ -10,6 +10,7 @@ import { Profile } from "../Components/Profile";
 import { Contact } from "../Components/Contact";
 import { UserContext } from "../App";
 import { useContext } from "react";
+import { Logout } from "../Components/Logout";
 export const Router = () => {
   const { Currentid } = useContext(UserContext);
   return (
@@ -31,6 +32,7 @@ export const Router = () => {
                 path="/dashboard/update/:id"
                 element={<AddContact Currentid={Currentid} />}
               />
+              <Route path="/dashboard/logout" element={<Logout />} />
             </Route>
           </Routes>
         </BrowserRouter>

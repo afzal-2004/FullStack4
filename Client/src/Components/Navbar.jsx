@@ -25,7 +25,7 @@ export const Navbar = () => {
               <Link to={"/"} className=" text-red-400">
                 {user.name.toUpperCase()}
               </Link>
-              <Link to={"/login"}>Logout</Link>
+              <Link to={"/logout"}>Logout</Link>
             </>
           ) : (
             <>

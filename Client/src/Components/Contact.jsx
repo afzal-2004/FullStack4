@@ -77,7 +77,7 @@ export const Contact = () => {
                   className="flex justify-between  p-2 
                 text-[25px] "
                 >
-                  <button className=" border border-red-500">
+                  <button>
                     <MdAutoDelete
                       className="text-red-500"
                       onClick={() => {
@@ -88,7 +88,6 @@ export const Contact = () => {
 
                   <Link to={`/dashboard/update/${data._id}`}>
                     <button
-                      className=" border border-green-700"
                       onClick={() => {
                         setCurrentid(data._id);
                         setUpdate(true);
