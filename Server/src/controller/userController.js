@@ -5,16 +5,6 @@ import bycrpt from "bcrypt";
 import jwt from "jsonwebtoken";
 const registerUser = async (req, res) => {
   const errors = validationResult(req);
-  // res.status(200).json({
-  //   message: "Hello This is My First  controller For testing Purpose",
-  // });
-
-  //    REGISTER USER STEP BY STEP  ALGORITHM
-  //  1. TAKE DATA FROM  FROUNTEND
-  //  2 . CHECK DATA IS NOT EMPTY
-  //  3 CHECK THIS DATA IS  NOT  ALREADY EXICTED IN YOU DATABASE IF  IT IS EXECTID THEN THROUGH ERROR
-  //    4. CREATE AN NEW ENTRY IN THE DATABASE
-  //  5 . CHECK  IN DATABASE USER IS CREATED OR NOT
 
   const { name, email, password } = req.body;
   console.log("Name is", name);
@@ -46,11 +36,6 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const errors = validationResult(req);
-
-  //  TAKE DATA FROM FROUNTEND
-  //  SEARCH BASES ON EMAIL
-  //  CHECK USER PASSWORD
-  //  IF  PASSWORD IS MATCHED THEN  SUCCESFULLY LOGIN THIS USER
 
   const { email, password } = req.body;
 
@@ -90,8 +75,5 @@ const loginUser = async (req, res) => {
 const Auth = async (req, res) => {
   return res.status(200).json({ success: true, ...req.user._doc });
 };
-const logoutuser = async (req, res) => {
-  //1 .   CHECK  THAT USE IS LOGIN OR NOT
-  //2 .  IF USER IS LOGIN THEN SUCCESFULLY LOAGOUT USER
-};
+const logoutuser = async (req, res) => {};
 export { registerUser, loginUser, Auth };
